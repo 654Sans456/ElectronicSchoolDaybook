@@ -16,6 +16,16 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="CommentTeacher" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Parents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="ID" />
@@ -101,6 +111,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Parents_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Students_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
@@ -163,6 +197,7 @@
         </Association>
         <EntityContainer Name="Хранилище ElectronicSchoolDaybookDBModelContainer">
           <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
@@ -177,6 +212,14 @@
           <AssociationSet Name="FK_Grades_SubjectTeacher" Association="Self.FK_Grades_SubjectTeacher">
             <End Role="SubjectTeacher" EntitySet="SubjectTeacher" />
             <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Students" Association="Self.FK_Parents_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="Self.FK_Parents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Parents" EntitySet="Parents" />
           </AssociationSet>
           <AssociationSet Name="FK_Students_Users" Association="Self.FK_Students_Users">
             <End Role="Users" EntitySet="Users" />
@@ -217,6 +260,18 @@
           <NavigationProperty Name="Student" Relationship="Self.FK_Grades_Students" FromRole="Grades" ToRole="Students" />
           <NavigationProperty Name="SubjectTeacher" Relationship="Self.FK_Grades_SubjectTeacher" FromRole="Grades" ToRole="SubjectTeacher" />
         </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Parents_Students" FromRole="Parents" ToRole="Students" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
@@ -235,6 +290,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Class" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_Students" FromRole="Students" ToRole="Grades" />
+          <NavigationProperty Name="Parents" Relationship="Self.FK_Parents_Students" FromRole="Students" ToRole="Parents" />
           <NavigationProperty Name="User" Relationship="Self.FK_Students_Users" FromRole="Students" ToRole="Users" />
         </EntityType>
         <EntityType Name="Subject">
@@ -286,6 +342,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parents" Relationship="Self.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_Users" FromRole="Users" ToRole="Students" />
           <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Users" FromRole="Users" ToRole="Teachers" />
@@ -311,6 +368,30 @@
             </Principal>
             <Dependent Role="Grades">
               <PropertyRef Name="SubjectTeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -374,8 +455,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ElectronicSchoolDaybookDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ElectronicSchoolDaybookDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="Parents" EntityType="Self.Parent" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Subjects" EntityType="Self.Subject" />
@@ -390,6 +472,14 @@
           <AssociationSet Name="FK_Grades_SubjectTeacher" Association="Self.FK_Grades_SubjectTeacher">
             <End Role="SubjectTeacher" EntitySet="SubjectTeachers" />
             <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Students" Association="Self.FK_Parents_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="Self.FK_Parents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Parents" EntitySet="Parents" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -417,7 +507,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ElectronicSchoolDaybookDBModelContainer" CdmEntityContainer="ElectronicSchoolDaybookDBEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ElectronicSchoolDaybookDBModelContainer" CdmEntityContainer="ElectronicSchoolDaybookDBEntities1">
           <EntitySetMapping Name="Grades">
             <EntityTypeMapping TypeName="ElectronicSchoolDaybookDBModel.Grade">
               <MappingFragment StoreEntitySet="Grades">
@@ -427,6 +517,17 @@
                 <ScalarProperty Name="Grade1" ColumnName="Grade" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CommentTeacher" ColumnName="CommentTeacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="ElectronicSchoolDaybookDBModel.Parent">
+              <MappingFragment StoreEntitySet="Parents">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
