@@ -18,7 +18,7 @@ namespace ElectronicSchoolDaybook
         public Student()
         {
             this.Grades = new HashSet<Grade>();
-            this.Parents = new HashSet<Parent>();
+            this.StudentParents = new HashSet<StudentParent>();
         }
     
         public int ID { get; set; }
@@ -30,7 +30,7 @@ namespace ElectronicSchoolDaybook
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Parent> Parents { get; set; }
+        public virtual ICollection<StudentParent> StudentParents { get; set; }
         public virtual User User { get; set; }
     }
 }

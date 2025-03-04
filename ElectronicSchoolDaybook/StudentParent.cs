@@ -12,21 +12,13 @@ namespace ElectronicSchoolDaybook
     using System;
     using System.Collections.Generic;
     
-    public partial class Parent
+    public partial class StudentParent
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Parent()
-        {
-            this.StudentParents = new HashSet<StudentParent>();
-        }
-    
         public int ID { get; set; }
-        public int UserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int StudentID { get; set; }
+        public int ParentID { get; set; }
     
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentParent> StudentParents { get; set; }
+        public virtual Parent Parent { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

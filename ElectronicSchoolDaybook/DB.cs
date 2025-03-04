@@ -8,6 +8,6 @@ namespace ElectronicSchoolDaybook
 {
     internal class DB
     {
-        public static ElectronicSchoolDaybookDBEntities1 Context = new ElectronicSchoolDaybookDBEntities1();
+        public static ElectronicSchoolDaybookDBEntitiesNew Context = new ElectronicSchoolDaybookDBEntitiesNew();
     }
 }

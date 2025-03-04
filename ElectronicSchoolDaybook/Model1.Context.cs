@@ -13,10 +13,10 @@ namespace ElectronicSchoolDaybook
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ElectronicSchoolDaybookDBEntities1 : DbContext
+    public partial class ElectronicSchoolDaybookDBEntitiesNew : DbContext
     {
-        public ElectronicSchoolDaybookDBEntities1()
-            : base("name=ElectronicSchoolDaybookDBEntities1")
+        public ElectronicSchoolDaybookDBEntitiesNew()
+            : base("name=ElectronicSchoolDaybookDBEntitiesNew")
         {
         }
     
@@ -28,6 +28,7 @@ namespace ElectronicSchoolDaybook
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<StudentParent> StudentParents { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SubjectTeacher> SubjectTeachers { get; set; }

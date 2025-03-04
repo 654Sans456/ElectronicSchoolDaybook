@@ -22,8 +22,8 @@ namespace ElectronicSchoolDaybook
             {
                 Session.CurrentUser = DB.Context.Users.FirstOrDefault(u => ((u.Username == username) && (u.Password == password)));
 
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+                UsersWindow usersWindow = new UsersWindow();
+                usersWindow.Show();
 
                 this.Close();
             }
