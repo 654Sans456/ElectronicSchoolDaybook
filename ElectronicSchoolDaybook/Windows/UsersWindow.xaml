@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElectronicSchoolDaybook"
         mc:Ignorable="d"
-        Title="UsersWindow" Height="450" Width="800">
+        Title="Таблица пользователей" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Удалить" Click="DeleteMenuItem_Click"/>
+            
+            <MenuItem Header="Таблицы">
+                <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
+            </MenuItem>
         </Menu>
         
         <DataGrid Name="UsersDataGrid" AutoGenerateColumns="False"
@@ -18,10 +22,10 @@
                   RowEditEnding="UsersDataGrid_RowEditEnding"
                   Margin="5">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="Auto"/>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                <DataGridTextColumn Header="Password" Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                <DataGridTextColumn Header="RoleID" Binding="{Binding RoleID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="Имя пользователя" Binding="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="Пароль" Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="ID Роли" Binding="{Binding RoleID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -81,5 +81,11 @@ namespace ElectronicSchoolDaybook
                 });
             }
         }
+
+        private void OpenRolesWindow_Click(object sender, RoutedEventArgs e)
+        {
+            RolesWindow rolesWindow = new RolesWindow();
+            rolesWindow.Show();
+        }
     }
 }

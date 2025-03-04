@@ -67,7 +67,7 @@
     <Compile Include="Grade.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
@@ -88,15 +88,22 @@
     <Compile Include="Parent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\RolesWindow.xaml.cs">
+      <DependentUpon>RolesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Session.cs" />
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UsersWindow.xaml">
+    <Page Include="Windows\RolesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UsersWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -126,7 +133,7 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="UsersWindow.xaml.cs">
+    <Compile Include="Windows\UsersWindow.xaml.cs">
       <DependentUpon>UsersWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
