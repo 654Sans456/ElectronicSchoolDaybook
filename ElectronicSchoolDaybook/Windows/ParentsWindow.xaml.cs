@@ -41,7 +41,7 @@ namespace ElectronicSchoolDaybook.Windows
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите пользователя для удаления.");
+                MessageBox.Show("Пожалуйста, выберите родителя для удаления.");
             }
         }
 
@@ -98,6 +98,12 @@ namespace ElectronicSchoolDaybook.Windows
         {
             StudentsWindow studentsWindow = new StudentsWindow();
             studentsWindow.Show();
+        }
+
+        private void OpenStudentParentWindow_Click(object sender, RoutedEventArgs e)
+        {
+            StudentParentWindow studentParentWindow = new StudentParentWindow();
+            studentParentWindow.Show();
         }
     }
 }

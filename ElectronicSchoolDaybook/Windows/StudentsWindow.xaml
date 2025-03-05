@@ -14,6 +14,7 @@
                 <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
                 <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
                 <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
+                <MenuItem Header="Связь родителя и студента школы" Click="OpenStudentParentWindow_Click"/>
             </MenuItem>
         </Menu>
 

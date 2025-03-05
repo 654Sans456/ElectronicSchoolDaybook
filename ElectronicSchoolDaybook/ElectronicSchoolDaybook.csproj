@@ -110,6 +110,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\StudentParentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StudentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\UsersWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,6 +147,12 @@
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StudentParentWindow.xaml.cs">
+      <DependentUpon>StudentParentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StudentsWindow.xaml.cs">
+      <DependentUpon>StudentsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\UsersWindow.xaml.cs">
       <DependentUpon>UsersWindow.xaml</DependentUpon>
