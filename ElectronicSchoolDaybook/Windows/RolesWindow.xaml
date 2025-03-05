@@ -13,6 +13,7 @@
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
                 <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
+                <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
             </MenuItem>
         </Menu>
 

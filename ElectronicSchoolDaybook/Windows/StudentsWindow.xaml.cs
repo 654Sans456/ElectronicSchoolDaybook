@@ -6,11 +6,11 @@ using System.Windows.Controls;
 
 namespace ElectronicSchoolDaybook.Windows
 {
-    public partial class ParentsWindow : Window
+    public partial class StudentsWindow : Window
     {
-        private Parent selectedParent;
+        private Student selectedStudent;
 
-        public ParentsWindow()
+        public StudentsWindow()
         {
             InitializeComponent();
             LoadData();
@@ -18,22 +18,22 @@ namespace ElectronicSchoolDaybook.Windows
 
         private void LoadData()
         {
-            ParentsDataGrid.ItemsSource = DB.Context.Parents.ToList();
+            StudentsDataGrid.ItemsSource = DB.Context.Students.ToList();
         }
 
-        private void ParentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedParent = ParentsDataGrid.SelectedItem as Parent;
+            selectedStudent = StudentsDataGrid.SelectedItem as Student;
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedParent != null)
+            if (selectedStudent != null)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить родителя: {selectedParent.FirstName}?", "Подтверждение", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить студента: {selectedStudent.FirstName}?", "Подтверждение", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    DB.Context.Parents.Remove(selectedParent);
+                    DB.Context.Students.Remove(selectedStudent);
                     DB.Context.SaveChanges();
 
                     LoadData();
@@ -45,34 +45,39 @@ namespace ElectronicSchoolDaybook.Windows
             }
         }
 
-        private void ParentsDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void StudentsDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 Dispatcher.InvokeAsync(() =>
                 {
-                    Parent parent = e.Row.Item as Parent;
-                    if (parent != null)
+                    Student Student = e.Row.Item as Student;
+                    if (Student != null)
                     {
-                        if (string.IsNullOrWhiteSpace(parent.FirstName))
+                        if (string.IsNullOrWhiteSpace(Student.FirstName))
                         {
                             MessageBox.Show("Поле FirstName обязательна для заполнения.");
                             return;
                         }
-                        else if (string.IsNullOrWhiteSpace(parent.LastName))
+                        else if (string.IsNullOrWhiteSpace(Student.LastName))
                         {
                             MessageBox.Show("Поле LastName обязательна для заполнения.");
                             return;
                         }
-                        else if (DB.Context.Users.FirstOrDefault(u => (u.ID == parent.UserID)) == null)
+                        else if (DB.Context.Users.FirstOrDefault(u => (u.ID == Student.UserID)) == null)
                         {
                             MessageBox.Show("Поле UserID было не верно указанно.");
                             return;
                         }
-
-                        if (DB.Context.Entry(parent).State == EntityState.Detached)
+                        else if (string.IsNullOrWhiteSpace(Student.Class))
                         {
-                            DB.Context.Parents.AddOrUpdate(parent);
+                            MessageBox.Show("Поле Class обязательна для заполнения.");
+                            return;
+                        }
+
+                        if (DB.Context.Entry(Student).State == EntityState.Detached)
+                        {
+                            DB.Context.Students.AddOrUpdate(Student);
                         }
 
                         DB.Context.SaveChanges();
@@ -94,10 +99,10 @@ namespace ElectronicSchoolDaybook.Windows
             usersWindow.Show();
         }
 
-        private void OpenStudentsWindow_Click(object sender, RoutedEventArgs e)
+        private void OpenParentsWindow_Click(object sender, RoutedEventArgs e)
         {
-            StudentsWindow studentsWindow = new StudentsWindow();
-            studentsWindow.Show();
+            ParentsWindow parentsWindow = new ParentsWindow();
+            parentsWindow.Show();
         }
     }
 }
