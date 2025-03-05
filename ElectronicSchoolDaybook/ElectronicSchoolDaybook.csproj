@@ -88,6 +88,9 @@
     <Compile Include="Parent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ParentsWindow.xaml.cs">
+      <DependentUpon>ParentsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RolesWindow.xaml.cs">
       <DependentUpon>RolesWindow.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
     </Compile>
     <Compile Include="Session.cs" />
     <Page Include="Windows\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ParentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

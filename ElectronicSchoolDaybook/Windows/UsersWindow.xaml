@@ -12,6 +12,7 @@
             
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
+                <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
             </MenuItem>
         </Menu>
         

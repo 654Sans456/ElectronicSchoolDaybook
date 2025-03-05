@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using ElectronicSchoolDaybook.Windows;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
@@ -86,6 +87,12 @@ namespace ElectronicSchoolDaybook
         {
             RolesWindow rolesWindow = new RolesWindow();
             rolesWindow.Show();
+        }
+
+        private void OpenParentsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            ParentsWindow parentsWindow = new ParentsWindow();
+            parentsWindow.Show();
         }
     }
 }
