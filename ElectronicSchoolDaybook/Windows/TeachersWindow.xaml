@@ -1,11 +1,11 @@
-﻿<Window x:Class="ElectronicSchoolDaybook.Windows.ParentsWindow"
+﻿<Window x:Class="ElectronicSchoolDaybook.Windows.TeachersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElectronicSchoolDaybook.Windows"
         mc:Ignorable="d"
-        Title="Таблица родителей" Height="450" Width="800">
+        Title="Таблица учителей" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Удалить" Click="DeleteMenuItem_Click"/>
@@ -13,24 +13,25 @@
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
                 <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
-                <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
+                <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
                 <MenuItem Header="Связь родителя и студента школы" Click="OpenStudentParentWindow_Click"/>
                 <MenuItem Header="Предметы" Click="OpenSubjectsWindow_Click"/>
-                <MenuItem Header="Учителя" Click="OpenTeachersWindow_Click"/>
+                <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
             </MenuItem>
         </Menu>
 
-        <DataGrid Name="ParentsDataGrid" AutoGenerateColumns="False"
-              CanUserAddRows="True"
-              SelectionMode="Single"
-              SelectionChanged="ParentsDataGrid_SelectionChanged"
-              RowEditEnding="ParentsDataGrid_RowEditEnding"
-              Margin="5">
+        <DataGrid Name="TeachersDataGrid" AutoGenerateColumns="False"
+      CanUserAddRows="True"
+      SelectionMode="Single"
+      SelectionChanged="TeachersDataGrid_SelectionChanged"
+      RowEditEnding="TeachersDataGrid_RowEditEnding"
+      Margin="5">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
                 <DataGridTextColumn Header="ID пользователя" Binding="{Binding UserID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
                 <DataGridTextColumn Header="Имя" Binding="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="Кабинет" Binding="{Binding Department, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

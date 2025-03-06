@@ -112,5 +112,11 @@ namespace ElectronicSchoolDaybook
             SubjectsWindow subjectsWindow = new SubjectsWindow();
             subjectsWindow.Show();
         }
+
+        private void OpenTeachersWindow_Click(object sender, RoutedEventArgs e)
+        {
+            TeachersWindow teachersWindow = new TeachersWindow();
+            teachersWindow.Show();
+        }
     }
 }

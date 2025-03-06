@@ -6,11 +6,11 @@ using System.Windows.Controls;
 
 namespace ElectronicSchoolDaybook.Windows
 {
-    public partial class StudentsWindow : Window
+    public partial class TeachersWindow : Window
     {
-        private Student selectedStudent;
+        private Teacher selectedTeacher;
 
-        public StudentsWindow()
+        public TeachersWindow()
         {
             InitializeComponent();
             LoadData();
@@ -18,22 +18,22 @@ namespace ElectronicSchoolDaybook.Windows
 
         private void LoadData()
         {
-            StudentsDataGrid.ItemsSource = DB.Context.Students.ToList();
+            TeachersDataGrid.ItemsSource = DB.Context.Teachers.ToList();
         }
 
-        private void StudentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TeachersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedStudent = StudentsDataGrid.SelectedItem as Student;
+            selectedTeacher = TeachersDataGrid.SelectedItem as Teacher;
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedStudent != null)
+            if (selectedTeacher != null)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить студента: {selectedStudent.FirstName}?", "Подтверждение", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить учителя: {selectedTeacher.FirstName}?", "Подтверждение", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    DB.Context.Students.Remove(selectedStudent);
+                    DB.Context.Teachers.Remove(selectedTeacher);
                     DB.Context.SaveChanges();
 
                     LoadData();
@@ -41,43 +41,43 @@ namespace ElectronicSchoolDaybook.Windows
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите студента для удаления.");
+                MessageBox.Show("Пожалуйста, выберите учителя для удаления.");
             }
         }
 
-        private void StudentsDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void TeachersDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 Dispatcher.InvokeAsync(() =>
                 {
-                    Student Student = e.Row.Item as Student;
-                    if (Student != null)
+                    Teacher teacher = e.Row.Item as Teacher;
+                    if (teacher != null)
                     {
-                        if (string.IsNullOrWhiteSpace(Student.FirstName))
+                        if (string.IsNullOrWhiteSpace(teacher.FirstName))
                         {
                             MessageBox.Show("Поле FirstName обязательна для заполнения.");
                             return;
                         }
-                        else if (string.IsNullOrWhiteSpace(Student.LastName))
+                        else if (string.IsNullOrWhiteSpace(teacher.LastName))
                         {
                             MessageBox.Show("Поле LastName обязательна для заполнения.");
                             return;
                         }
-                        else if (DB.Context.Users.FirstOrDefault(u => (u.ID == Student.UserID)) == null)
+                        else if (DB.Context.Users.FirstOrDefault(u => (u.ID == teacher.UserID)) == null)
                         {
                             MessageBox.Show("Поле UserID было не верно указанно.");
                             return;
                         }
-                        else if (string.IsNullOrWhiteSpace(Student.Class))
+                        else if (string.IsNullOrWhiteSpace(teacher.Department))
                         {
-                            MessageBox.Show("Поле Class обязательна для заполнения.");
+                            MessageBox.Show("Поле Department обязательна для заполнения.");
                             return;
                         }
 
-                        if (DB.Context.Entry(Student).State == EntityState.Detached)
+                        if (DB.Context.Entry(teacher).State == EntityState.Detached)
                         {
-                            DB.Context.Students.AddOrUpdate(Student);
+                            DB.Context.Teachers.AddOrUpdate(teacher);
                         }
 
                         DB.Context.SaveChanges();
@@ -117,10 +117,10 @@ namespace ElectronicSchoolDaybook.Windows
             subjectsWindow.Show();
         }
 
-        private void OpenTeachersWindow_Click(object sender, RoutedEventArgs e)
+        private void OpenStudentsWindow_Click(object sender, RoutedEventArgs e)
         {
-            TeachersWindow teachersWindow = new TeachersWindow();
-            teachersWindow.Show();
+            StudentsWindow studentsWindow = new StudentsWindow();
+            studentsWindow.Show();
         }
     }
 }
