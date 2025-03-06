@@ -1,18 +1,17 @@
-﻿using ElectronicSchoolDaybook.Windows;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace ElectronicSchoolDaybook
+namespace ElectronicSchoolDaybook.Windows
 {
-    public partial class RolesWindow : Window
+    public partial class SubjectsWindow : Window
     {
-        private Role selectedRole;
+        private Role selectedSubject;
 
-        public RolesWindow()
+        public SubjectsWindow()
         {
             InitializeComponent();
             LoadData();
@@ -20,22 +19,22 @@ namespace ElectronicSchoolDaybook
 
         private void LoadData()
         {
-            RolesDataGrid.ItemsSource = DB.Context.Roles.ToList();
+            SubjectsDataGrid.ItemsSource = DB.Context.Subjects.ToList();
         }
 
-        private void RolesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SubjectsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedRole = RolesDataGrid.SelectedItem as Role;
+            selectedSubject = SubjectsDataGrid.SelectedItem as Role;
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedRole != null)
+            if (selectedSubject != null)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить роль: {selectedRole.Name}?", "Подтверждение", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить предмет: {selectedSubject.Name}?", "Подтверждение", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    DB.Context.Roles.Remove(selectedRole);
+                    DB.Context.Roles.Remove(selectedSubject);
                     DB.Context.SaveChanges();
 
                     LoadData();
@@ -43,28 +42,28 @@ namespace ElectronicSchoolDaybook
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите роль для удаления.");
+                MessageBox.Show("Пожалуйста, выберите предмет для удаления.");
             }
         }
 
-        private void RolesDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void SubjectsDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 Dispatcher.InvokeAsync(() =>
                 {
-                    Role role = e.Row.Item as Role;
-                    if (role != null)
+                    Subject subject = e.Row.Item as Subject;
+                    if (subject != null)
                     {
-                        if (string.IsNullOrWhiteSpace(role.Name))
+                        if (string.IsNullOrWhiteSpace(subject.Name))
                         {
                             MessageBox.Show("Поле Name обязательна для заполнения.");
                             return;
                         }
 
-                        if (DB.Context.Entry(role).State == EntityState.Detached)
+                        if (DB.Context.Entry(subject).State == EntityState.Detached)
                         {
-                            DB.Context.Roles.AddOrUpdate(role);
+                            DB.Context.Subjects.AddOrUpdate(subject);
                         }
 
                         DB.Context.SaveChanges();
@@ -98,10 +97,10 @@ namespace ElectronicSchoolDaybook
             studentParentWindow.Show();
         }
 
-        private void OpenSubjectsWindow_Click(object sender, RoutedEventArgs e)
+        private void OpenRolesWindow_Click(object sender, RoutedEventArgs e)
         {
-            SubjectsWindow subjectsWindow = new SubjectsWindow();
-            subjectsWindow.Show();
+            RolesWindow rolesWindow = new RolesWindow();
+            rolesWindow.Show();
         }
     }
 }

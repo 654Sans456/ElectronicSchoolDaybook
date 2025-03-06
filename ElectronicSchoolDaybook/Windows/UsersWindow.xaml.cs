@@ -106,5 +106,11 @@ namespace ElectronicSchoolDaybook
             StudentParentWindow studentParentWindow = new StudentParentWindow();
             studentParentWindow.Show();
         }
+
+        private void OpenSubjectsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            SubjectsWindow subjectsWindow = new SubjectsWindow();
+            subjectsWindow.Show();
+        }
     }
 }

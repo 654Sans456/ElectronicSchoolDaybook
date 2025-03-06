@@ -15,6 +15,7 @@
                 <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
                 <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
                 <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
+                <MenuItem Header="Предметы" Click="OpenSubjectsWindow_Click"/>
             </MenuItem>
         </Menu>
 
