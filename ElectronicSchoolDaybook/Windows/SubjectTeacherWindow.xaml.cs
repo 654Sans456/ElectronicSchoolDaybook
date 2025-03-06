@@ -6,11 +6,11 @@ using System.Windows.Controls;
 
 namespace ElectronicSchoolDaybook.Windows
 {
-    public partial class StudentParentWindow : Window
+    public partial class SubjectTeacherWindow : Window
     {
-        private StudentParent selectedStudentParent;
+        private SubjectTeacher selectedSubjectTeacher;
 
-        public StudentParentWindow()
+        public SubjectTeacherWindow()
         {
             InitializeComponent();
             LoadData();
@@ -18,23 +18,23 @@ namespace ElectronicSchoolDaybook.Windows
 
         private void LoadData()
         {
-            StudentParentDataGrid.ItemsSource = DB.Context.StudentParents.ToList();
+            SubjectTeacherDataGrid.ItemsSource = DB.Context.SubjectTeachers.ToList();
         }
 
-        private void StudentParentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SubjectTeacherDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedStudentParent = StudentParentDataGrid.SelectedItem as StudentParent;
+            selectedSubjectTeacher = SubjectTeacherDataGrid.SelectedItem as SubjectTeacher;
         }
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedStudentParent != null)
+            if (selectedSubjectTeacher != null)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить связь родителья и студента школы под номером: {selectedStudentParent.ID}?",
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить связь учителя и их предета под номером: {selectedSubjectTeacher.ID}?",
                                               "Подтверждение", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    DB.Context.StudentParents.Remove(selectedStudentParent);
+                    DB.Context.SubjectTeachers.Remove(selectedSubjectTeacher);
                     DB.Context.SaveChanges();
 
                     LoadData();
@@ -42,33 +42,33 @@ namespace ElectronicSchoolDaybook.Windows
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите связь родителья и студента школы для удаления.");
+                MessageBox.Show("Пожалуйста, выберите связь учителя и их предета для удаления.");
             }
         }
 
-        private void StudentParentDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void SubjectTeacherDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
                 Dispatcher.InvokeAsync(() =>
                 {
-                    StudentParent studentParent = e.Row.Item as StudentParent;
-                    if (studentParent != null)
+                    SubjectTeacher subjectTeacher = e.Row.Item as SubjectTeacher;
+                    if (subjectTeacher != null)
                     {
-                        if (DB.Context.Students.FirstOrDefault(s => (s.ID == studentParent.StudentID)) == null)
+                        if (DB.Context.Subjects.FirstOrDefault(s => (s.ID == subjectTeacher.SubjectID)) == null)
                         {
-                            MessageBox.Show("Поле StudentID было не верно указанно.");
+                            MessageBox.Show("Поле SubjectID было не верно указанно.");
                             return;
                         }
-                        else if (DB.Context.Parents.FirstOrDefault(p => (p.ID == studentParent.ParentID)) == null)
+                        else if (DB.Context.Teachers.FirstOrDefault(t => (t.ID == subjectTeacher.TeacherID)) == null)
                         {
-                            MessageBox.Show("Поле ParentID было не верно указанно.");
+                            MessageBox.Show("Поле TeacherID было не верно указанно.");
                             return;
                         }
 
-                        if (DB.Context.Entry(studentParent).State == EntityState.Detached)
+                        if (DB.Context.Entry(subjectTeacher).State == EntityState.Detached)
                         {
-                            DB.Context.StudentParents.AddOrUpdate(studentParent);
+                            DB.Context.SubjectTeachers.AddOrUpdate(subjectTeacher);
                         }
 
                         DB.Context.SaveChanges();
@@ -114,10 +114,10 @@ namespace ElectronicSchoolDaybook.Windows
             teachersWindow.Show();
         }
 
-        private void OpenSubjectTeacherWindow_Click(object sender, RoutedEventArgs e)
+        private void OpenStudentParentWindow_Click(object sender, RoutedEventArgs e)
         {
-            SubjectTeacherWindow subjectTeacherWindow = new SubjectTeacherWindow();
-            subjectTeacherWindow.Show();
+            StudentParentWindow studentParentWindow = new StudentParentWindow();
+            studentParentWindow.Show();
         }
     }
 }

@@ -1,35 +1,36 @@
-﻿<Window x:Class="ElectronicSchoolDaybook.Windows.SubjectsWindow"
+﻿<Window x:Class="ElectronicSchoolDaybook.Windows.SubjectTeacherWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElectronicSchoolDaybook.Windows"
         mc:Ignorable="d"
-        Title="Таблица предметов" Height="450" Width="800">
+        Title="Таблица Учителей и их предметов" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Удалить" Click="DeleteMenuItem_Click"/>
 
             <MenuItem Header="Таблицы">
-                <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
+                <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
                 <MenuItem Header="Родители" Click="OpenParentsWindow_Click"/>
                 <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
-                <MenuItem Header="Связь родителя и студента школы" Click="OpenStudentParentWindow_Click"/>
-                <MenuItem Header="Роли" Click="OpenRolesWindow_Click"/>
+                <MenuItem Header="Пользователи" Click="OpenUsersWindow_Click"/>
+                <MenuItem Header="Предметы" Click="OpenSubjectsWindow_Click"/>
                 <MenuItem Header="Учителя" Click="OpenTeachersWindow_Click"/>
-                <MenuItem Header="Связь учителей и их предметов" Click="OpenSubjectTeacherWindow_Click"/>
+                <MenuItem Header="Связь родителя и студента школы" Click="OpenStudentParentWindow_Click"/>
             </MenuItem>
         </Menu>
 
-        <DataGrid Name="SubjectsDataGrid" AutoGenerateColumns="False"
+        <DataGrid Name="SubjectTeacherDataGrid" AutoGenerateColumns="False"
           CanUserAddRows="True"
           SelectionMode="Single"
-          SelectionChanged="SubjectsDataGrid_SelectionChanged"
-          RowEditEnding="SubjectsDataGrid_RowEditEnding"
+          SelectionChanged="SubjectTeacherDataGrid_SelectionChanged"
+          RowEditEnding="SubjectTeacherDataGrid_RowEditEnding"
           Margin="5">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="ID Предмета" Binding="{Binding SubjectID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                <DataGridTextColumn Header="ID Учителя" Binding="{Binding TeacherID, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
