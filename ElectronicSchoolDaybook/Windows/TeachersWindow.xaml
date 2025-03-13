@@ -18,6 +18,7 @@
                 <MenuItem Header="Предметы" Click="OpenSubjectsWindow_Click"/>
                 <MenuItem Header="Студенты школы" Click="OpenStudentsWindow_Click"/>
                 <MenuItem Header="Связь учителей и их предметов" Click="OpenSubjectTeacherWindow_Click"/>
+                <MenuItem Header="Оценки" Click="OpenGradesWindow_Click"/>
             </MenuItem>
         </Menu>
 

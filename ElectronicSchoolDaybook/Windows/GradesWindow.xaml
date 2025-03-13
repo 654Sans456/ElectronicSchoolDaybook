@@ -45,8 +45,7 @@
             </DataGrid>
         </DockPanel>
 
-        <!-- Временно неработает -->
-        <!--<DockPanel LastChildFill="True" Grid.Row="1">
+        <DockPanel LastChildFill="True" Grid.Row="1">
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -55,8 +54,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0">Минимальная оценка</Label>
-                <Label Grid.Column="1">Минимальная оценка</Label>
+                <Label Name="LaberGradeMin" Grid.Column="0">Минимальная оценка</Label>
+                <Label Name="LaberGradeMax" Grid.Column="1">Максимальная оценка</Label>
                 <Label Grid.Column="2">Предмет</Label>
             </Grid>
 
@@ -68,8 +67,33 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="3" Click="" Margin="45 5 45 5">Поиск</Button>
+                <Slider Name="SliderMin"
+                        Grid.Column="0"
+                        Minimum="1"
+                        Maximum="5"
+                        TickPlacement="BottomRight"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        ValueChanged="SliderMin_ValueChanged"
+                        Margin="5 5 5 5"/>
+
+                <Slider Name="SliderMax"
+                        Grid.Column="1"
+                        Minimum="1"
+                        Maximum="5"
+                        TickPlacement="BottomRight"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        ValueChanged="SliderMax_ValueChanged"
+                        Margin="5 5 5 5"/>
+
+                <ComboBox Name="ComboBoxWithSubjects"
+                          Grid.Column="2"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="ID"
+                          Margin="5 5 5 5"/>
+                <Button Name="SearchButton" Grid.Column="3" Margin="45 5 45 5" Click="SearchStudents_Click">Поиск</Button>
             </Grid>
-        </DockPanel>-->
+        </DockPanel>
     </Grid>
 </Window>

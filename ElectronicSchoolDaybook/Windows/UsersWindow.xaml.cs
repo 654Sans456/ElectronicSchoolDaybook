@@ -124,5 +124,11 @@ namespace ElectronicSchoolDaybook
             SubjectTeacherWindow subjectTeacherWindow = new SubjectTeacherWindow();
             subjectTeacherWindow.Show();
         }
+
+        private void OpenGradesWindow_Click(object sender, RoutedEventArgs e)
+        {
+            GradesWindow gradesWindow = new GradesWindow();
+            gradesWindow.Show();
+        }
     }
 }

@@ -119,5 +119,11 @@ namespace ElectronicSchoolDaybook.Windows
             StudentParentWindow studentParentWindow = new StudentParentWindow();
             studentParentWindow.Show();
         }
+
+        private void OpenGradesWindow_Click(object sender, RoutedEventArgs e)
+        {
+            GradesWindow gradesWindow = new GradesWindow();
+            gradesWindow.Show();
+        }
     }
 }
