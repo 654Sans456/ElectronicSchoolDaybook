@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElectronicSchoolDaybook
 {
-    internal class DB
+    public class DB
     {
         public static ElectronicSchoolDaybookDBEntitiesNew Context = new ElectronicSchoolDaybookDBEntitiesNew();
     }

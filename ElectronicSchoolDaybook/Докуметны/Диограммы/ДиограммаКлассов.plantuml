@@ -1,0 +1,73 @@
+@startuml ДиограммаКлассов
+class User {
+    +int ID
+    +string Username
+    +string Password
+    +int RoleID
+}
+
+class Role {
+    +int ID
+    +string Name
+}
+
+class Teacher {
+    +int ID
+    +int UserID
+    +string FirstName
+    +string LastName
+    +string Department
+}
+
+class Student {
+    +int ID
+    +int UserID
+    +string FirstName
+    +string LastName
+    +string Class
+}
+
+class Parent {
+    +int ID
+    +int UserID
+    +string FirstName
+    +string LastName
+}
+
+class Subject {
+    +int ID
+    +string Name
+}
+
+class Grade {
+    +int ID
+    +int StudentID
+    +int SubjectTeacherID
+    +int Grade
+    +date Date
+    +string CommentTeacher
+}
+
+class SubjectTeacher {
+    +int ID
+    +int SubjectID
+    +int TeacherID
+}
+
+class StudentParent {
+    +int ID
+    +int StudentID
+    +int ParentID
+}
+
+User "1" --> "0..*" Role
+Teacher "1" --> "0..*" User
+Student "1" --> "0..*" User
+Parent "1" --> "0..*" User
+SubjectTeacher "1" --> "0..*" Subject
+SubjectTeacher "1" --> "0..*" Teacher
+Grade "1" --> "0..*" Student
+Grade "1" --> "0..*" SubjectTeacher
+StudentParent "1" --> "0..*" Student
+StudentParent "1" --> "0..*" Parent
+@enduml

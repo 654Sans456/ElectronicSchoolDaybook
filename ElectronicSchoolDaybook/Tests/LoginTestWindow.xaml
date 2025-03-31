@@ -1,0 +1,14 @@
+﻿<Window x:Class="ElectronicSchoolDaybook.LoginTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Тесты авторизации" Height="250" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <Button Content="Тест успешной авторизации" Click="btnTestSuccess_Click" Margin="60 5 60 5"/>
+            <Button Content="Тест неуспешной авторизации (не правильный логин)" Click="btnTestFailLogin_Click" Margin="5 5 5 5"/>
+            <Button Content="Тест неуспешной авторизации (не правильный пароль)" Click="btnTestFailPassword_Click" Margin="5 5 5 5"/>
+            <Button Content="Тест неуспешной авторизации" Click="btnTestFail_Click" Margin="60 5 60 5"/>
+            <Button Content="Тест пустой авторизации" Click="btnTestEmpty_Click" Margin="85 5 85 5"/>
+        </StackPanel>
+    </Grid>
+</Window>

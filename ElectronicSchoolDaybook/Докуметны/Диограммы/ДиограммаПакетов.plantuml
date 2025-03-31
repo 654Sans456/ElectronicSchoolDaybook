@@ -1,0 +1,17 @@
+@startuml ДиограммаПакетов
+package "UI" {
+    [UserInterface]
+}
+
+package "Business Logic" as BL {
+    [GradeCalculator]
+    [UserManager]
+}
+
+package "Data Access" as DA {
+    [DatabaseConnector]
+}
+
+UI --> BL
+BL --> DA
+@enduml
