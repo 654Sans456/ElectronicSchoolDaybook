@@ -1,0 +1,32 @@
+@startgantt ВнедрениеПроекта
+language ru
+
+saturday are closed
+sunday are closed
+
+project starts the 2025-02-27
+
+[Планирование] requires 5 days
+[Сбор требований] requires 7 days
+[Проектирование] requires 10 days
+[Разработка] requires 28 days
+[Тестирование] requires 7 days
+[Развертывание] requires 3 days
+
+[Сбор требований] starts at [Планирование]'s end
+[Проектирование] starts at [Сбор требований]'s end
+[Разработка] starts at [Проектирование]'s end
+[Тестирование] starts at [Разработка]'s end
+[Развертывание] starts at [Тестирование]'s end
+
+[Планирование] is colored in red
+[Сбор требований] is colored in orange
+[Проектирование] is colored in yellow
+[Разработка] is colored in red
+[Тестирование] is colored in orange
+[Развертывание] is colored in yellow
+
+saturday are colored in lightgray
+sunday are colored in lightgray
+
+@endgantt
