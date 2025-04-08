@@ -224,6 +224,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Диограммы\АрхитектураCистемы.plantuml" />
+    <None Include="Диограммы\ВнедрениеПроекта.plantuml" />
+    <None Include="Диограммы\ДиограммаКлассов.plantuml" />
+    <None Include="Диограммы\ДиограммаПакетов.plantuml" />
     <None Include="Докуметны\ДетализацияТребований.md" />
     <None Include="Докуметны\ПакетыCистемы.md" />
     <None Include="Докуметны\ПользователиИБизнесПроцессы.md" />
@@ -247,6 +251,10 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Диограммы\АрхитектураCистемы.jpg" />
+    <Resource Include="Диограммы\ВнедрениеПроекта.jpg" />
+    <Resource Include="Диограммы\ДиограммаКлассов.jpg" />
+    <Resource Include="Диограммы\ДиограммаПакетов.jpg" />
     <Resource Include="Докуметны\ВнешнийВидПрограммы.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
